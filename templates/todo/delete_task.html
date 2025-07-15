@@ -1,0 +1,18 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Delete Task{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center" style="font-family: 'Cormorant Garamond', serif; color: #e76f82;">
+        Delete Task
+    </h2>
+    <p class="text-center">Are you sure you want to delete "<strong>{{ task.title }}</strong>"?</p>
+
+    <form method="post" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2">Delete</button>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

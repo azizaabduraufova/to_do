@@ -1,0 +1,52 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Your Tasks{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <a href="{% url 'create_task' %}" class="btn btn-pink mb-3">+ Add New Task</a>
+
+        <h2 class="mb-4 text-center" style="font-family: 'Cormorant Garamond', serif; color: #e76f82;">Your To-Do
+            List</h2>
+
+
+
+
+        {% if tasks %}
+            <ul class="list-group">
+                {% for task in tasks %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ task.title }}</strong>
+                            {% if task.deadline %}
+                                <small class="text-muted d-block">Due: {{ task.deadline|date:"M d, Y H:i" }}</small>
+                            {% endif %}
+                            {% if task.description %}
+                                <small class="d-block">{{ task.description }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex align-items-center gap-2">
+                            <form action="{% url 'toggle_task' task.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="btn btn-sm {% if task.completed %}btn-outline-warning{% else %}btn-outline-success{% endif %}">
+                                    {% if task.completed %}Mark as Pending{% else %}Mark as Done{% endif %}
+                                </button>
+                            </form>
+
+                            <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{% url 'delete_task' task.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <span class="badge {% if task.completed %}bg-success{% else %}bg-warning{% endif %}">
+            {% if task.completed %}Done{% else %}Pending{% endif %}
+        </span>
+                        </div>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-center mt-5">You don’t have any tasks yet. Add something!</p>
+        {% endif %}
+    </div>
+{% endblock %}

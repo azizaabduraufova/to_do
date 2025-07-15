@@ -1,0 +1,19 @@
+.btn-pink {
+    background-color: #e76f82;
+    color: white;
+    border: none;
+}
+
+.btn-pink:hover {
+    background-color: #d5586c;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: black;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
