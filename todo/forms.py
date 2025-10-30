@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from todo.models import Task
+from .models import Profile
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -16,3 +17,8 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'deadline': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
+
+class ProfileImageForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']

@@ -1,5 +1,7 @@
 from django.urls import path
 from todo import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -11,5 +13,6 @@ urlpatterns = [
     path('tasks/<int:task_id>/edit/', views.edit_task, name='edit_task'),
     path('tasks/<int:task_id>/delete/', views.delete_task, name='delete_task'),
     path('tasks/<int:task_id>/toggle/', views.toggle_task_status, name='toggle_task'),
-
+    path('profile/', views.profile_view, name='profile'),
+    path('search/', views.search_tasks, name='search_tasks'),
 ]

@@ -1,0 +1,34 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center" style="color: #e76f82;">
+        Results for "{{ query }}"
+    </h2>
+
+    {% if tasks %}
+        <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ task.title }}</strong>
+                        {% if task.deadline %}
+                            <small class="text-muted d-block">Due: {{ task.deadline|date:"M d, Y H:i" }}</small>
+                        {% endif %}
+                        {% if task.description %}
+                            <small class="d-block">{{ task.description }}</small>
+                        {% endif %}
+                    </div>
+                    <span class="badge {% if task.completed %}bg-success{% else %}bg-warning{% endif %}">
+                        {% if task.completed %}Done{% else %}Pending{% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center">No matching tasks found.</p>
+    {% endif %}
+</div>
+{% endblock %}
